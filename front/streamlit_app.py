@@ -3,7 +3,7 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 import io
 import numpy as np
-from googletrans import Translator  # нужно установить
+from deep_translator import GoogleTranslator
 
 # === НАСТРОЙКИ ===
 try:
@@ -22,7 +22,7 @@ st.set_page_config(
 # Инициализируем переводчик
 @st.cache_resource
 def init_translator():
-    return Translator()
+    return GoogleTranslator(source='ru', target='en')
 
 translator = init_translator()
 
@@ -31,13 +31,12 @@ def translate_to_english(text: str) -> str:
     if not text.strip():
         return text
     
-    # Проверяем, есть ли русские буквы
     if any('\u0400' <= char <= '\u04FF' for char in text):
         try:
-            translated = translator.translate(text, src='ru', dest='en')
-            return translated.text
+            translated = translator.translate(text)
+            return translated
         except Exception as e:
-            st.warning(f"Ошибка перевода: {e}. Использую исходный текст.")
+            st.warning(f"Ошибка перевода: {e}")
             return text
     return text
 
