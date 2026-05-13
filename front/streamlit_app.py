@@ -6,7 +6,7 @@ import numpy as np
 from googletrans import Translator  # нужно установить
 
 # === НАСТРОЙКИ ===
-api_url = "API_URL", "http://localhost:8000/detect""
+api_url = "API_URL", "http://localhost:8000/detect"
 DEFAULT_CONFIDENCE = 0.5  # изменено с 0.15 на 0.5
 
 st.set_page_config(
