@@ -6,8 +6,12 @@ import numpy as np
 from googletrans import Translator  # нужно установить
 
 # === НАСТРОЙКИ ===
-api_url = "API_URL", "http://localhost:8000/detect"
-DEFAULT_CONFIDENCE = 0.5  # изменено с 0.15 на 0.5
+try:
+    api_url = st.secrets["API_URL"]
+except:
+    api_url = "http://localhost:8000/detect"
+
+DEFAULT_CONFIDENCE = 0.5  
 
 st.set_page_config(
     page_title="YOLO-World Object Detector",
